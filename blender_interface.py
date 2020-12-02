@@ -12,7 +12,7 @@ class BlenderInterface():
 
         # Deselect all. All new object added to the scene will automatically selected.
         self.blender_renderer = bpy.context.scene.render
-        self.blender_renderer.use_antialiasing = False
+        self.blender_renderer.use_antialiasing = True 
         self.blender_renderer.resolution_x = resolution
         self.blender_renderer.resolution_y = resolution
         self.blender_renderer.resolution_percentage = 100
@@ -29,13 +29,13 @@ class BlenderInterface():
         lamp1 = bpy.data.lamps['Lamp']
         lamp1.type = 'SUN'
         lamp1.shadow_method = 'NOSHADOW'
-        lamp1.use_specular = False
+        lamp1.use_specular = False 
         lamp1.energy = 1.
 
         bpy.ops.object.lamp_add(type='SUN')
         lamp2 = bpy.data.lamps['Sun']
         lamp2.shadow_method = 'NOSHADOW'
-        lamp2.use_specular = False
+        lamp2.use_specular = False 
         lamp2.energy = 1.
         bpy.data.objects['Sun'].rotation_euler = bpy.data.objects['Lamp'].rotation_euler
         bpy.data.objects['Sun'].rotation_euler[0] += 180
@@ -43,7 +43,7 @@ class BlenderInterface():
         bpy.ops.object.lamp_add(type='SUN')
         lamp2 = bpy.data.lamps['Sun.001']
         lamp2.shadow_method = 'NOSHADOW'
-        lamp2.use_specular = False
+        lamp2.use_specular = False 
         lamp2.energy = 0.3
         bpy.data.objects['Sun.001'].rotation_euler = bpy.data.objects['Lamp'].rotation_euler
         bpy.data.objects['Sun.001'].rotation_euler[0] += 90
@@ -77,15 +77,15 @@ class BlenderInterface():
         # Disable transparency & specularities
         M = bpy.data.materials
         for i in range(len(M)):
-            M[i].use_transparency = False
+            M[i].use_transparency = True 
             M[i].specular_intensity = 0.0
 
         # Disable texture interpolation
         T = bpy.data.textures
         for i in range(len(T)):
             try:
-                T[i].use_interpolation = False
-                T[i].use_mipmap = False
+                T[i].use_interpolation = True 
+                T[i].use_mipmap = True 
                 T[i].use_filter_size_min = True
                 T[i].filter_type = "BOX"
             except:

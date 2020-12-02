@@ -13,6 +13,7 @@ p.add_argument('--output_dir', type=str, required=True, help='The path the outpu
 p.add_argument('--num_observations', type=int, required=True, help='The path the output will be dumped to.')
 p.add_argument('--sphere_radius', type=float, required=True, help='The path the output will be dumped to.')
 p.add_argument('--mode', type=str, required=True, help='Options: train and test')
+p.add_argument('--resolution', type=int, default=512, help='Image output resolution')
 
 argv = sys.argv
 argv = sys.argv[sys.argv.index("--") + 1:]
@@ -22,7 +23,7 @@ opt = p.parse_args(argv)
 instance_name = opt.mesh_fpath.split('/')[-3]
 instance_dir = os.path.join(opt.output_dir, instance_name)
 
-renderer = blender_interface.BlenderInterface(resolution=128)
+renderer = blender_interface.BlenderInterface(resolution=opt.resolution)
 
 if opt.mode == 'train':
     cam_locations = util.sample_spherical(opt.num_observations, opt.sphere_radius)
