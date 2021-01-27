@@ -12,7 +12,7 @@ p.add_argument('--mesh_fpath', type=str, required=True, help='The path the outpu
 p.add_argument('--output_dir', type=str, required=True, help='The path the output will be dumped to.')
 p.add_argument('--num_observations', type=int, required=True, help='The path the output will be dumped to.')
 p.add_argument('--sphere_radius', type=float, required=True, help='The path the output will be dumped to.')
-p.add_argument('--mode', type=str, required=True, help='Options: train and test')
+p.add_argument('--mode', type=str, required=True, help='Options: train, test, equal')
 p.add_argument('--resolution', type=int, default=512, help='Image output resolution')
 
 argv = sys.argv
@@ -29,6 +29,8 @@ if opt.mode == 'train':
     cam_locations = util.sample_spherical(opt.num_observations, opt.sphere_radius)
 elif opt.mode == 'test':
     cam_locations = util.get_archimedean_spiral(opt.sphere_radius, opt.num_observations)
+if opt.mode == 'equal':
+    cam_locations = util.sample_equal(opt.sphere_radius)
 
 obj_location = np.zeros((1,3))
 

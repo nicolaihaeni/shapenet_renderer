@@ -41,6 +41,19 @@ def sample_spherical(n, radius=1.):
     return xyz
 
 
+def sample_equally(radius=1.0):
+    translations = []
+    for azi in range(0, 360, 20):
+        for ele in range(-90, 90, 30):
+            azimuth_rad = np.deg2rad(-azi)
+            elevation_rad = np.deg2rad(ele)
+            x = radius * np.cos(elevation_rad) * np.cos(azimuth_rad)
+            y = radius * np.cos(elevation_rad) * np.sin(azimuth_rad)
+            z = radius * np.sin(elevation_rad)
+            translations.append((x, y, z))
+    return np.array(translations)
+
+
 def set_camera_focal_length_in_world_units(camera_data, focal_length):
     scene = bpy.context.scene
     resolution_x_in_px = scene.render.resolution_x
